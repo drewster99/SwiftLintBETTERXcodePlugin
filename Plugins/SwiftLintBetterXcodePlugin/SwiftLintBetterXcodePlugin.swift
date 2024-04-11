@@ -6,9 +6,9 @@ struct SwiftLintBetterXcodePlugin: BuildToolPlugin {
     /// Entry point for creating build commands for targets in Swift packages.
     func createBuildCommands(context: PluginContext, target: Target) async throws -> [Command] {
         let swiftLintPath = try context.tool(named: "swiftlint").path
-
+        
         /// paths of Swift source files in this target
-        let paths = target.sourceModule?.sourceFiles
+        let paths = (target as? SourceModuleTarget)?.sourceFiles
             .filter({ sourceFile in
                 sourceFile.path.lastComponent.hasSuffix(".swift")
             })
