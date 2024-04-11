@@ -75,6 +75,7 @@ extension SwiftLintBetterXcodePlugin: XcodeBuildToolPlugin {
         ]
 
         let configPath = "\(context.xcodeProject.directory.string)/.swiftlint.yml"
+        NSLog("*** TRYING TO LINT USING CONFIG PATH \(configPath)")
         if FileManager.default.fileExists(atPath: configPath) {
             arguments.append(contentsOf: [
                 "--config",
@@ -83,6 +84,7 @@ extension SwiftLintBetterXcodePlugin: XcodeBuildToolPlugin {
         }
 
         let cachePath = "\(context.pluginWorkDirectory.string)"
+        NSLog("*** TRYING TO USE WORK DIRECTORY \(cachePath)")
         if !FileManager.default.fileExists(atPath: cachePath) {
             try FileManager.default.createDirectory(atPath: cachePath, withIntermediateDirectories: true)
         }
